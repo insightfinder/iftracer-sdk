@@ -19,7 +19,11 @@ def create_joke():
 ## Use this package for an upgraded tracing experience
 
 ```
-iftracer-sdk = {git = "https://<token>@github.com/insightfinder/iftracer-sdk"}
+Use `poetry add git https://github.com/insightfinder/iftracer-sdk'` in command line
+OR
+Add iftracer-sdk = {git = "https://<token>@github.com/insightfinder/iftracer-sdk"} to your package's `pyproject.toml`
+
+Run poetry lock && poetry install after each time the `iftracer-sdk` package got updated if you are testing the iftracer-sdk changes locally. No need to do this if you are testing it remotely.
 ```
 
 This package will use the opentelemetry packages from [ifllmetry](https://github.com/insightfinder/ifllmetry)
