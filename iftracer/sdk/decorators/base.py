@@ -145,7 +145,10 @@ def aentity_method(
                 TraceloopSpanKindValues.AGENT,
             ]:
                 set_workflow_name(entity_name)
-            span_name = f"{entity_name}.{tlp_span_kind.value}"
+            # span_name = f"{entity_name}.{tlp_span_kind.value}"
+
+            span_name = (f"{name}.{tlp_span_kind.value}" if name else f"{fn.__name__}.{tlp_span_kind.value}")
+
 
             with get_tracer() as tracer:
                 span = tracer.start_span(span_name)
