@@ -111,7 +111,7 @@ def _add_result_traces_to_spans(span: Span, res: Dict[str, Any] , *args, **kwarg
         if hasattr(rag_config, 'dataset_id') and rag_config.dataset_id is not None:
             span.set_attribute(SpanAttributes.INSIGHTFINDER_ENTITY_RAG_CONFIG_DATASET, rag_config.dataset_id )
         if hasattr(rag_config, 'model_fields_set') and rag_config.model_fields_set is not None:
-            span.set_attribute(SpanAttributes.INSIGHTFINDER_ENTITY_RAG_CONFIG_MODEL_FIELDS_SET, rag_config.model_fields_set )
+            span.set_attribute(SpanAttributes.INSIGHTFINDER_ENTITY_RAG_CONFIG_MODEL_FIELDS_SET, str(rag_config.model_fields_set) )
 
 
 
