@@ -1504,7 +1504,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-alephalpha"
 
 [[package]]
@@ -1529,7 +1529,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-anthropic"
 
 [[package]]
@@ -1552,7 +1552,7 @@ opentelemetry-semantic-conventions-ai = "0.3.6"
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-bedrock"
 
 [[package]]
@@ -1577,7 +1577,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-chromadb"
 
 [[package]]
@@ -1602,7 +1602,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-cohere"
 
 [[package]]
@@ -1627,7 +1627,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-google-generativeai"
 
 [[package]]
@@ -1652,7 +1652,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-haystack"
 
 [[package]]
@@ -1662,7 +1662,7 @@ description = "OpenTelemetry Langchain instrumentation"
 optional = false
 python-versions = ">=3.9,<4"
 files = []
-develop = true
+develop = false
 
 [package.dependencies]
 opentelemetry-api = "^1.25.0"
@@ -1674,8 +1674,11 @@ opentelemetry-semantic-conventions-ai = "0.3.6"
 instruments = []
 
 [package.source]
-type = "directory"
-url = "../opentelemetry-instrumentation-langchain"
+type = "git"
+url = "https://github.com/insightfinder/ifllmetry.git"
+reference = "HEAD"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
+subdirectory = "packages/opentelemetry-instrumentation-langchain"
 
 [[package]]
 name = "opentelemetry-instrumentation-llamaindex"
@@ -1700,7 +1703,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-llamaindex"
 
 [[package]]
@@ -1725,7 +1728,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-marqo"
 
 [[package]]
@@ -1750,7 +1753,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-milvus"
 
 [[package]]
@@ -1775,7 +1778,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-mistralai"
 
 [[package]]
@@ -1800,7 +1803,7 @@ instruments = ["ollama (>=0.2.0,<0.3.0)"]
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-ollama"
 
 [[package]]
@@ -1826,7 +1829,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-openai"
 
 [[package]]
@@ -1851,7 +1854,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-pinecone"
 
 [[package]]
@@ -1876,7 +1879,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-qdrant"
 
 [[package]]
@@ -1901,7 +1904,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-replicate"
 
 [[package]]
@@ -1967,7 +1970,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-together"
 
 [[package]]
@@ -1989,7 +1992,7 @@ opentelemetry-semantic-conventions-ai = "0.3.6"
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-transformers"
 
 [[package]]
@@ -2035,7 +2038,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-vertexai"
 
 [[package]]
@@ -2060,7 +2063,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-watsonx"
 
 [[package]]
@@ -2085,7 +2088,7 @@ instruments = []
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-instrumentation-weaviate"
 
 [[package]]
@@ -2145,7 +2148,7 @@ develop = false
 type = "git"
 url = "https://github.com/insightfinder/ifllmetry.git"
 reference = "HEAD"
-resolved_reference = "3f4047806edceabb1a5c45c56369aa2c0383e7c0"
+resolved_reference = "52d4861a54805876c1d2a771e4bdc49f353ad7ac"
 subdirectory = "packages/opentelemetry-semantic-conventions-ai"
 
 [[package]]
@@ -3401,4 +3404,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<4"
-content-hash = "3b65f49083f1f3aa6a85f30cc0848148f497ecdd9e8806faa666ac06dec3a40e"
+content-hash = "33298baa626f0123d11d78388d022ce5c7ffa139b006f03649f83ff4138a494b"

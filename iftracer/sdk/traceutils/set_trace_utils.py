@@ -6,8 +6,8 @@ from typing import Dict, Any
 from collections.abc import Iterable
 MAX_DEPTH = 4
 # _add_model_traces_to_spans
-INSIGHTFINDER_ENTITY_PROMPT_TOKEN = ['prompt_tokens','prompt_eval_count']
-INSIGHTFINDER_ENTITY_EVAL_TOKEN = ['eval_tokens', 'eval_count']
+INSIGHTFINDER_ENTITY_PROMPT_TOKEN = ['prompt_tokens','prompt_eval_count', 'input_tokens']
+INSIGHTFINDER_ENTITY_EVAL_TOKEN = ['eval_tokens', 'eval_count', 'output_tokens']
 INSIGHTFINDER_ENTITY_COMPLETION_TOKEN = ['completion_tokens','completion_count']
 INSIGHTFINDER_ENTITY_TOTAL_TOKEN = ['total_tokens','total_count']
 INSIGHTFINDER_ENTITY_ERROR_MESSAGES = ['error_messages','error_message']

@@ -43,8 +43,7 @@ opentelemetry-instrumentation-cohere = { git = "https://github.com/insightfinder
 opentelemetry-instrumentation-google-generativeai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-google-generativeai" }
 opentelemetry-instrumentation-pinecone = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-pinecone" }
 opentelemetry-instrumentation-qdrant = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-qdrant" }
-opentelemetry-instrumentation-langchain = { path = "/home/zhixuan/vscodes/ifllmetry/packages/opentelemetry-instrumentation-langchain", develop = true }
-
+opentelemetry-instrumentation-langchain = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-langchain" }
 opentelemetry-instrumentation-chromadb = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-chromadb" }
 opentelemetry-instrumentation-transformers = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-transformers" }
 opentelemetry-instrumentation-together = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-together" }
