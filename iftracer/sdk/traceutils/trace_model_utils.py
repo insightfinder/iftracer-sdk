@@ -14,7 +14,9 @@ Limitation: The function won't accept streaming response or response without the
 def trace_model_response(model: Dict[str, Any]) -> None:
     return
 
-
+@task(TRACE_MODEL_RESPONSE)
+def trace_model_response_str(model: str) -> None:
+    return
 
 
 
