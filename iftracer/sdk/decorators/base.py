@@ -76,9 +76,10 @@ def entity_method(
                 res = fn(*args, **kwargs)
                 if entity_name == TRACE_MODEL_RESPONSE:
                     _add_model_traces_to_spans(span, res, args, kwargs)
-                if tlp_span_kind in [
+                elif tlp_span_kind in [
                     TraceloopSpanKindValues.WORKFLOW
                 ]:
+                    _add_model_traces_to_spans(span, res, args, kwargs)
                     _add_result_traces_to_spans(span, res, args, kwargs)
                 # span will be ended in the generator
                 if isinstance(res, types.GeneratorType):
@@ -182,9 +183,10 @@ def aentity_method(
                 res = await fn(*args, **kwargs)
                 if entity_name == TRACE_MODEL_RESPONSE:
                     _add_model_traces_to_spans(span, res, args, kwargs)
-                if tlp_span_kind in [
+                elif tlp_span_kind in [
                     TraceloopSpanKindValues.WORKFLOW
                 ]:
+                    _add_model_traces_to_spans(span, res, args, kwargs)
                     _add_result_traces_to_spans(span, res, args, kwargs)
                 # span will be ended in the generator
                 if isinstance(res, types.AsyncGeneratorType):
