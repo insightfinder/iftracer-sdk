@@ -17,8 +17,8 @@ from iftracer.sdk.tracing.tracing import (
 )
 from iftracer.sdk.utils import camel_to_snake
 from iftracer.sdk.utils.json_encoder import JSONEncoder
-from iftracer.sdk.traceutils.set_trace_utils import _add_model_traces_to_spans, _add_result_traces_to_spans
-from iftracer.sdk.traceutils.consts import TRACE_MODEL_RESPONSE
+from iftracer.sdk.traceutils.set_trace_utils import _add_model_traces_to_spans, _add_result_traces_to_spans, _add_str_model_traces_to_spans
+from iftracer.sdk.traceutils.consts import TRACE_MODEL_RESPONSE, STR_OUTPUT_PARSER
 def entity_method(
     name: Optional[str] = None,
     version: Optional[int] = None,
@@ -74,7 +74,9 @@ def entity_method(
                     Telemetry().log_exception(e)
 
                 res = fn(*args, **kwargs)
-                if entity_name == TRACE_MODEL_RESPONSE:
+                if entity_name == STR_OUTPUT_PARSER:
+                    _add_str_model_traces_to_spans(span, res, args, kwargs)
+                elif entity_name == TRACE_MODEL_RESPONSE:
                     _add_model_traces_to_spans(span, res, args, kwargs)
                 elif tlp_span_kind in [
                     TraceloopSpanKindValues.WORKFLOW
@@ -181,7 +183,9 @@ def aentity_method(
                     Telemetry().log_exception(e)
 
                 res = await fn(*args, **kwargs)
-                if entity_name == TRACE_MODEL_RESPONSE:
+                if entity_name == STR_OUTPUT_PARSER:
+                    _add_str_model_traces_to_spans(span, res, args, kwargs)
+                elif entity_name == TRACE_MODEL_RESPONSE:
                     _add_model_traces_to_spans(span, res, args, kwargs)
                 elif tlp_span_kind in [
                     TraceloopSpanKindValues.WORKFLOW

@@ -2,6 +2,7 @@
 from opentelemetry.trace.span import Span
 from opentelemetry.semconv.ai import SpanAttributes
 from typing import Dict, Any
+import json
 
 from collections.abc import Iterable
 MAX_DEPTH = 4
@@ -70,6 +71,12 @@ def _add_model_traces_to_spans(span: Span, res: Dict[str, Any] , *args, **kwargs
     llm_model_name =  _find_value_from_keys_list(keys_dict, INSIGHTFINDER_ENTITY_LLM_MODEL_NAME)
     if llm_model_name is not None:
         span.set_attribute(SpanAttributes.INSIGHTFINDER_ENTITY_LLM_MODEL_NAME, llm_model_name)
+
+'''
+Same as _add_model_traces_to_spans. Only difference is this will receive a string format of res and need to parse it to a dict.
+'''
+def _add_str_model_traces_to_spans(span: Span, res: str , *args, **kwargs) -> None:
+    _add_model_traces_to_spans(span, json.loads(res), args, kwargs)
 
 '''
 Add tags and its value to spans. 
