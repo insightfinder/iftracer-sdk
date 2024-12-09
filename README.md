@@ -14,24 +14,24 @@ Add the local path `iftracer-sdk = { path = "/path-to-iftracer-sdk-pkg/iftracer-
 Option 3: (In progress) `pip install iftracer-sdk`
 ```
 ## Configuration Guide
-Configuration process is the same as [Traceloop](https://www.traceloop.com/docs/openllmetry/configuration).
 Make sure to correctly configure .env file: `TRACELOOP_BASE_URL=<OpenTelemetry Endpoint>`.
-Alternatively, You can put the opentelemetry endpoint into python code like: `Traceloop.init(api_endpoint=<opentelemetry endpoint>)`
+Alternatively, You can put the opentelemetry endpoint into python code like: `Iftracer.init(api_endpoint=<opentelemetry endpoint>)`
 The tracing feature won't work without setting TRACELOOP_BASE_URL correctly.
 
 ## Quick Start Guide
-Add the decorators like `@workflow`, `@aworkflow`, `@task`, and `@atask` over the methods to get the tracing details.
+Add the decorators like `@workflow`, `@aworkflow`, `@task`, and `@atask` over the methods to get the tracing details. Add @workflow or @aworkflow over a function if you want to see more tags in tracing report.
 
 ```python
 from iftracer.sdk import Iftracer 
 from iftracer.sdk.decorators import workflow
-Iftracer.init(app_name="joke_generation_service")
+Iftracer.init(api_endpoint=YOUR_OPENTELEMETRY_API_ENDPOINT) # Make sure to contain your opentelemetry api endpoint. When creating the opentelemetry api endpoint, make sure to include the license key we provided to you.
+# Only need to use .init() once in your project.
 
 @workflow(name="joke_creation")
 def create_joke():
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[{"role": "user", "content": "Tell me a joke about opentelemetry"}],
+    completion = openai.ChatCompletion.create(  
+        model="gpt-3.5-turbo",  # You can change to other models like ollma or claude
+        messages=[{"role": "user", "content": "Tell me a joke about opentelemetry"}],  # configure your LLM model API_KEY correctly.
     )
     return completion.choices[0].message.content
 ```
