@@ -30,7 +30,6 @@ from iftracer.sdk.decorators import workflow
 import openai
 from iftracer.sdk import Iftracer
 
-# Set up OpenAI API key before using this api
 @workflow(name="get_chat_completion_test")
 def get_gpt4o_mini_completion(messages, model="gpt-4o-mini", temperature=0.7):
     """
@@ -62,7 +61,7 @@ def get_gpt4o_mini_completion(messages, model="gpt-4o-mini", temperature=0.7):
 
 # Example Usage
 if __name__ == "__main__":
-    # Set your OpenAI API key. Need to remove these 2 lines after setting up api key env variable in GAI server
+    # Set your OpenAI API key here or export it as environment variable.
     openai.api_key = <Your OpenAI API Key>
     Iftracer.init(api_endpoint=<Your OpenTelemetry API Endpoint>)  # Make sure to include the license key provided by InsightFinder when creating an OpenTelemetry API Endpoint 
     messages = [
