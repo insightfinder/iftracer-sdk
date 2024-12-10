@@ -58,17 +58,17 @@ class Iftracer:
         api_endpoint = os.getenv("IFTRACER_BASE_URL") or api_endpoint
         api_key = None # Disable the usage of api_key
 
-        if (
-            traceloop_sync_enabled
-            and api_endpoint != ""
-            and not exporter
-            and not processor
-        ):
-            Iftracer.__fetcher = Fetcher(base_url=api_endpoint, api_key=api_key)
-            Iftracer.__fetcher.run()
-            print(
-                Fore.GREEN + "Iftracer syncing configuration and prompts" + Fore.RESET
-            )
+        # if (
+        #     traceloop_sync_enabled
+        #     and api_endpoint != ""
+        #     and not exporter
+        #     and not processor
+        # ):
+        #     Iftracer.__fetcher = Fetcher(base_url=api_endpoint, api_key=api_key)
+        #     Iftracer.__fetcher.run()
+        #     print(
+        #         Fore.GREEN + "Iftracer syncing configuration and prompts" + Fore.RESET
+        #     )
 
         if not is_tracing_enabled():
             print(Fore.YELLOW + "Tracing is disabled" + Fore.RESET)
