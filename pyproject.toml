@@ -34,29 +34,29 @@ opentelemetry-exporter-otlp-proto-grpc = "^1.25.0"
 opentelemetry-instrumentation-requests = "^0.46b0"
 opentelemetry-instrumentation-sqlalchemy = "^0.46b0"
 opentelemetry-instrumentation-urllib3 = "^0.46b0"
-opentelemetry-semantic-conventions-ai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-semantic-conventions-ai" }
-opentelemetry-instrumentation-mistralai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-mistralai" }
-opentelemetry-instrumentation-openai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-openai" }
-opentelemetry-instrumentation-ollama = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-ollama" }
-opentelemetry-instrumentation-anthropic = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-anthropic" }
-opentelemetry-instrumentation-cohere = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-cohere" }
-opentelemetry-instrumentation-google-generativeai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-google-generativeai" }
-opentelemetry-instrumentation-pinecone = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-pinecone" }
-opentelemetry-instrumentation-qdrant = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-qdrant" }
-opentelemetry-instrumentation-langchain = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-langchain" }
-opentelemetry-instrumentation-chromadb = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-chromadb" }
-opentelemetry-instrumentation-transformers = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-transformers" }
-opentelemetry-instrumentation-together = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-together" }
-opentelemetry-instrumentation-llamaindex = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-llamaindex" }
-opentelemetry-instrumentation-milvus = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-milvus" }
-opentelemetry-instrumentation-haystack = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-haystack" }
-opentelemetry-instrumentation-bedrock = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-bedrock" }
-opentelemetry-instrumentation-replicate = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-replicate" }
-opentelemetry-instrumentation-vertexai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-vertexai" }
-opentelemetry-instrumentation-watsonx = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-watsonx" }
-opentelemetry-instrumentation-weaviate = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-weaviate" }
-opentelemetry-instrumentation-alephalpha = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-alephalpha" }
-opentelemetry-instrumentation-marqo = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-marqo" }
+opentelemetry-semantic-conventions-ai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-semantic-conventions-ai", branch="test" }
+opentelemetry-instrumentation-mistralai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-mistralai", branch="test" }
+opentelemetry-instrumentation-openai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-openai", branch="test" }
+opentelemetry-instrumentation-ollama = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-ollama", branch="test" }
+opentelemetry-instrumentation-anthropic = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-anthropic", branch="test" }
+opentelemetry-instrumentation-cohere = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-cohere", branch="test" }
+opentelemetry-instrumentation-google-generativeai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-google-generativeai", branch="test" }
+opentelemetry-instrumentation-pinecone = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-pinecone", branch="test" }
+opentelemetry-instrumentation-qdrant = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-qdrant", branch="test" }
+opentelemetry-instrumentation-langchain = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-langchain", branch="test" }
+opentelemetry-instrumentation-chromadb = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-chromadb", branch="test" }
+opentelemetry-instrumentation-transformers = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-transformers", branch="test" }
+opentelemetry-instrumentation-together = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-together", branch="test" }
+opentelemetry-instrumentation-llamaindex = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-llamaindex", branch="test" }
+opentelemetry-instrumentation-milvus = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-milvus", branch="test" }
+opentelemetry-instrumentation-haystack = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-haystack", branch="test" }
+opentelemetry-instrumentation-bedrock = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-bedrock", branch="test" }
+opentelemetry-instrumentation-replicate = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-replicate", branch="test" }
+opentelemetry-instrumentation-vertexai = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-vertexai", branch="test" }
+opentelemetry-instrumentation-watsonx = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-watsonx", branch="test" }
+opentelemetry-instrumentation-weaviate = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-weaviate", branch="test" }
+opentelemetry-instrumentation-alephalpha = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-alephalpha", branch="test" }
+opentelemetry-instrumentation-marqo = { git = "https://github.com/insightfinder/ifllmetry.git", subdirectory = "packages/opentelemetry-instrumentation-marqo", branch="test" }
 colorama = "^0.4.6"
 tenacity = "^8.2.3"
 pydantic = ">=1"
