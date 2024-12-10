@@ -20,8 +20,8 @@ from iftracer.sdk.prompts.client import PromptRegistryClient
 from iftracer.sdk.tracing.content_allow_list import ContentAllowList
 from iftracer.sdk.version import __version__
 
-MAX_RETRIES = os.getenv("TRACELOOP_PROMPT_MANAGER_MAX_RETRIES") or 3
-POLLING_INTERVAL = os.getenv("TRACELOOP_PROMPT_MANAGER_POLLING_INTERVAL") or 5
+MAX_RETRIES = os.getenv("IFTRACER_PROMPT_MANAGER_MAX_RETRIES") or 3
+POLLING_INTERVAL = os.getenv("IFTRACER_PROMPT_MANAGER_POLLING_INTERVAL") or 5
 
 
 class Fetcher:

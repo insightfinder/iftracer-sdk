@@ -25,7 +25,7 @@ def test_task_io_serialization_with_langchain(exporter):
 
     task_span = next(span for span in spans if span.name == "answer_question.task")
     assert (
-        json.loads(task_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_OUTPUT))[
+        json.loads(task_span.attributes.get(SpanAttributes.IFTRACER_ENTITY_OUTPUT))[
             "kwargs"
         ]["content"]
         == "Yes"

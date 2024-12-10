@@ -53,18 +53,18 @@ def entity_method(
                     chained_entity_name = entity_name
 
                 span.set_attribute(
-                    SpanAttributes.TRACELOOP_SPAN_KIND, tlp_span_kind.value
+                    SpanAttributes.IFTRACER_SPAN_KIND, tlp_span_kind.value
                 )
                 span.set_attribute(
-                    SpanAttributes.TRACELOOP_ENTITY_NAME, chained_entity_name
+                    SpanAttributes.IFTRACER_ENTITY_NAME, chained_entity_name
                 )
                 if version:
-                    span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_VERSION, version)
+                    span.set_attribute(SpanAttributes.IFTRACER_ENTITY_VERSION, version)
 
                 try:
                     if _should_send_prompts():
                         span.set_attribute(
-                            SpanAttributes.TRACELOOP_ENTITY_INPUT,
+                            SpanAttributes.IFTRACER_ENTITY_INPUT,
                             json.dumps(
                                 {"args": args, "kwargs": kwargs}, cls=JSONEncoder
                             ),
@@ -90,7 +90,7 @@ def entity_method(
                 try:
                     if _should_send_prompts():
                         span.set_attribute(
-                            SpanAttributes.TRACELOOP_ENTITY_OUTPUT,
+                            SpanAttributes.IFTRACER_ENTITY_OUTPUT,
                             json.dumps(res, cls=JSONEncoder),
                         )
                 except TypeError as e:
@@ -165,18 +165,18 @@ def aentity_method(
                     chained_entity_name = entity_name
 
                 span.set_attribute(
-                    SpanAttributes.TRACELOOP_SPAN_KIND, tlp_span_kind.value
+                    SpanAttributes.IFTRACER_SPAN_KIND, tlp_span_kind.value
                 )
                 span.set_attribute(
-                    SpanAttributes.TRACELOOP_ENTITY_NAME, chained_entity_name
+                    SpanAttributes.IFTRACER_ENTITY_NAME, chained_entity_name
                 )
                 if version:
-                    span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_VERSION, version)
+                    span.set_attribute(SpanAttributes.IFTRACER_ENTITY_VERSION, version)
 
                 try:
                     if _should_send_prompts():
                         span.set_attribute(
-                            SpanAttributes.TRACELOOP_ENTITY_INPUT,
+                            SpanAttributes.IFTRACER_ENTITY_INPUT,
                             json.dumps({"args": args, "kwargs": kwargs}),
                         )
                 except TypeError as e:
@@ -199,7 +199,7 @@ def aentity_method(
                 try:
                     if _should_send_prompts():
                         span.set_attribute(
-                            SpanAttributes.TRACELOOP_ENTITY_OUTPUT, json.dumps(res)
+                            SpanAttributes.IFTRACER_ENTITY_OUTPUT, json.dumps(res)
                         )
                 except TypeError as e:
                     Telemetry().log_exception(e)
@@ -257,5 +257,5 @@ async def _ahandle_generator(span, ctx_token, res):
 
 def _should_send_prompts():
     return (
-        os.getenv("TRACELOOP_TRACE_CONTENT") or "true"
+        os.getenv("IFTRACER_TRACE_CONTENT") or "true"
     ).lower() == "true" or context_api.get_value("override_enable_content_tracing")

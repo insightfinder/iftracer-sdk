@@ -94,7 +94,7 @@ def exporter_with_no_metrics():
         _trace_wrapper_instance = TracerWrapper.instance
         del TracerWrapper.instance
 
-    os.environ["TRACELOOP_METRICS_ENABLED"] = "false"
+    os.environ["IFTRACER_METRICS_ENABLED"] = "false"
 
     exporter = InMemorySpanExporter()
 
@@ -108,4 +108,4 @@ def exporter_with_no_metrics():
     # Restore singleton if any
     if _trace_wrapper_instance:
         TracerWrapper.instance = _trace_wrapper_instance
-        os.environ["TRACELOOP_METRICS_ENABLED"] = "true"
+        os.environ["IFTRACER_METRICS_ENABLED"] = "true"

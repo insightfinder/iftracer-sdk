@@ -8,9 +8,9 @@ from iftracer.sdk.decorators import workflow, task
 
 @pytest.fixture(autouse=True)
 def disable_trace_content():
-    os.environ["TRACELOOP_TRACE_CONTENT"] = "false"
+    os.environ["IFTRACER_TRACE_CONTENT"] = "false"
     yield
-    os.environ["TRACELOOP_TRACE_CONTENT"] = "true"
+    os.environ["IFTRACER_TRACE_CONTENT"] = "true"
 
 
 @pytest.fixture

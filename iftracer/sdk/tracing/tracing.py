@@ -327,11 +327,11 @@ class TracerWrapper(object):
     def _span_processor_on_start(self, span, parent_context):
         workflow_name = get_value("workflow_name")
         if workflow_name is not None:
-            span.set_attribute(SpanAttributes.TRACELOOP_WORKFLOW_NAME, workflow_name)
+            span.set_attribute(SpanAttributes.IFTRACER_WORKFLOW_NAME, workflow_name)
 
         entity_name = get_value("entity_name")
         if entity_name is not None:
-            span.set_attribute(SpanAttributes.TRACELOOP_ENTITY_NAME, entity_name)
+            span.set_attribute(SpanAttributes.IFTRACER_ENTITY_NAME, entity_name)
 
         association_properties = get_value("association_properties")
         if association_properties is not None:
@@ -347,42 +347,42 @@ class TracerWrapper(object):
             managed_prompt = get_value("managed_prompt")
             if managed_prompt is not None:
                 span.set_attribute(
-                    SpanAttributes.TRACELOOP_PROMPT_MANAGED, managed_prompt
+                    SpanAttributes.IFTRACER_PROMPT_MANAGED, managed_prompt
                 )
 
             prompt_key = get_value("prompt_key")
             if prompt_key is not None:
-                span.set_attribute(SpanAttributes.TRACELOOP_PROMPT_KEY, prompt_key)
+                span.set_attribute(SpanAttributes.IFTRACER_PROMPT_KEY, prompt_key)
 
             prompt_version = get_value("prompt_version")
             if prompt_version is not None:
                 span.set_attribute(
-                    SpanAttributes.TRACELOOP_PROMPT_VERSION, prompt_version
+                    SpanAttributes.IFTRACER_PROMPT_VERSION, prompt_version
                 )
 
             prompt_version_name = get_value("prompt_version_name")
             if prompt_version_name is not None:
                 span.set_attribute(
-                    SpanAttributes.TRACELOOP_PROMPT_VERSION_NAME, prompt_version_name
+                    SpanAttributes.IFTRACER_PROMPT_VERSION_NAME, prompt_version_name
                 )
 
             prompt_version_hash = get_value("prompt_version_hash")
             if prompt_version_hash is not None:
                 span.set_attribute(
-                    SpanAttributes.TRACELOOP_PROMPT_VERSION_HASH, prompt_version_hash
+                    SpanAttributes.IFTRACER_PROMPT_VERSION_HASH, prompt_version_hash
                 )
 
             prompt_template = get_value("prompt_template")
             if prompt_template is not None:
                 span.set_attribute(
-                    SpanAttributes.TRACELOOP_PROMPT_TEMPLATE, prompt_template
+                    SpanAttributes.IFTRACER_PROMPT_TEMPLATE, prompt_template
                 )
 
             prompt_template_variables = get_value("prompt_template_variables")
             if prompt_template_variables is not None:
                 for key, value in prompt_template_variables.items():
                     span.set_attribute(
-                        f"{SpanAttributes.TRACELOOP_PROMPT_TEMPLATE_VARIABLES}.{key}",
+                        f"{SpanAttributes.IFTRACER_PROMPT_TEMPLATE_VARIABLES}.{key}",
                         value,
                     )
 
@@ -407,7 +407,7 @@ class TracerWrapper(object):
         if hasattr(cls, "instance"):
             return True
 
-        if (os.getenv("TRACELOOP_SUPPRESS_WARNINGS") or "false").lower() == "true":
+        if (os.getenv("IFTRACER_SUPPRESS_WARNINGS") or "false").lower() == "true":
             return False
 
         print(
@@ -436,7 +436,7 @@ def set_association_properties(properties: dict) -> None:
 def _set_association_properties_attributes(span, properties: dict) -> None:
     for key, value in properties.items():
         span.set_attribute(
-            f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.{key}", value
+            f"{SpanAttributes.IFTRACER_ASSOCIATION_PROPERTIES}.{key}", value
         )
 
 
@@ -991,17 +991,17 @@ def metrics_common_attributes():
     common_attributes = {}
     workflow_name = get_value("workflow_name")
     if workflow_name is not None:
-        common_attributes[SpanAttributes.TRACELOOP_WORKFLOW_NAME] = workflow_name
+        common_attributes[SpanAttributes.IFTRACER_WORKFLOW_NAME] = workflow_name
 
     entity_name = get_value("entity_name")
     if entity_name is not None:
-        common_attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] = entity_name
+        common_attributes[SpanAttributes.IFTRACER_ENTITY_NAME] = entity_name
 
     association_properties = get_value("association_properties")
     if association_properties is not None:
         for key, value in association_properties.items():
             common_attributes[
-                f"{SpanAttributes.TRACELOOP_ASSOCIATION_PROPERTIES}.{key}"
+                f"{SpanAttributes.IFTRACER_ASSOCIATION_PROPERTIES}.{key}"
             ] = value
 
     return common_attributes

@@ -66,22 +66,22 @@ def test_simple_workflow(exporter, openai_client):
         span for span in spans if span.name == "pirate_joke_generator.workflow"
     )
     task_span = next(span for span in spans if span.name == "something_creator.task")
-    assert json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]) == {
+    assert json.loads(task_span.attributes[SpanAttributes.IFTRACER_ENTITY_INPUT]) == {
         "args": ["joke"],
         "kwargs": {"subject": "OpenTelemetry"},
     }
 
     assert (
-        json.loads(task_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_OUTPUT))
+        json.loads(task_span.attributes.get(SpanAttributes.IFTRACER_ENTITY_OUTPUT))
         == joke
     )
     assert task_span.parent.span_id == workflow_span.context.span_id
     assert (
-        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME]
+        workflow_span.attributes[SpanAttributes.IFTRACER_ENTITY_NAME]
         == "pirate_joke_generator"
     )
-    assert workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_VERSION] == 1
-    assert task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_VERSION] == 2
+    assert workflow_span.attributes[SpanAttributes.IFTRACER_ENTITY_VERSION] == 1
+    assert task_span.attributes[SpanAttributes.IFTRACER_ENTITY_VERSION] == 2
 
 
 @pytest.mark.vcr
@@ -134,22 +134,22 @@ async def test_simple_aworkflow(exporter, async_openai_client):
         span for span in spans if span.name == "pirate_joke_generator.workflow"
     )
     task_span = next(span for span in spans if span.name == "something_creator.task")
-    assert json.loads(task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_INPUT]) == {
+    assert json.loads(task_span.attributes[SpanAttributes.IFTRACER_ENTITY_INPUT]) == {
         "args": ["joke"],
         "kwargs": {"subject": "OpenTelemetry"},
     }
 
     assert (
-        json.loads(task_span.attributes.get(SpanAttributes.TRACELOOP_ENTITY_OUTPUT))
+        json.loads(task_span.attributes.get(SpanAttributes.IFTRACER_ENTITY_OUTPUT))
         == joke
     )
     assert task_span.parent.span_id == workflow_span.context.span_id
     assert (
-        workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME]
+        workflow_span.attributes[SpanAttributes.IFTRACER_ENTITY_NAME]
         == "pirate_joke_generator"
     )
-    assert workflow_span.attributes[SpanAttributes.TRACELOOP_ENTITY_VERSION] == 1
-    assert task_span.attributes[SpanAttributes.TRACELOOP_ENTITY_VERSION] == 2
+    assert workflow_span.attributes[SpanAttributes.IFTRACER_ENTITY_VERSION] == 1
+    assert task_span.attributes[SpanAttributes.IFTRACER_ENTITY_VERSION] == 2
 
 
 @pytest.mark.vcr
@@ -221,12 +221,12 @@ def test_unrelated_entities(exporter):
     task_1_span = spans[1]
 
     assert (
-        workflow_1_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] == "workflow_1"
+        workflow_1_span.attributes[SpanAttributes.IFTRACER_ENTITY_NAME] == "workflow_1"
     )
-    assert workflow_1_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == "workflow"
+    assert workflow_1_span.attributes[SpanAttributes.IFTRACER_SPAN_KIND] == "workflow"
 
-    assert task_1_span.attributes[SpanAttributes.TRACELOOP_ENTITY_NAME] == "task_1"
-    assert task_1_span.attributes[SpanAttributes.TRACELOOP_SPAN_KIND] == "task"
+    assert task_1_span.attributes[SpanAttributes.IFTRACER_ENTITY_NAME] == "task_1"
+    assert task_1_span.attributes[SpanAttributes.IFTRACER_SPAN_KIND] == "task"
     assert task_1_span.parent is None
 
 

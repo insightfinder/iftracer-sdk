@@ -19,7 +19,7 @@ class Telemetry:
         if not hasattr(cls, "instance"):
             obj = cls.instance = super(Telemetry, cls).__new__(cls)
             obj._telemetry_enabled = (
-                os.getenv("TRACELOOP_TELEMETRY") or "true"
+                os.getenv("IFTRACER_TELEMETRY") or "true"
             ).lower() == "true" and "pytest" not in sys.modules
 
             if obj._telemetry_enabled:
