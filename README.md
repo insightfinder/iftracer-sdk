@@ -1,35 +1,28 @@
 # iftracer-sdk
 
-Iftracer’s Python SDK allows you to easily start monitoring and debugging your LLM execution. Tracing is done in a non-intrusive way, built on top of OpenTelemetry. The repo contains standard OpenTelemetry instrumentations for LLM providers and Vector DBs, as well as a Iftracer SDK that makes it easy to get started with OpenLLMetry, while still outputting standard OpenTelemetry data that can be connected to your observability stack. If you already have OpenTelemetry instrumented, you can just add any of our instrumentations directly. 
+Iftracer’s Python SDK allows you to easily start monitoring and debugging your LLM execution. Tracing is done in a non-intrusive way, built on top of OpenTelemetry. The repo contains standard OpenTelemetry instrumentations for LLM providers and Vector DBs, as well as a Iftracer SDK that makes it easy to get started with OpenLLMetry, while still outputting standard OpenTelemetry data that can be connected to your observability stack.
 
 ## Installation Guide
 
 ```
-Option 1: Add GitHub link to your project directly. Example with pyproject.toml: 
-Add the github link `iftracer-sdk = {git = "https://github.com/insightfinder/iftracer-sdk"}` directly to your package's `pyproject.toml` under `[tool.poetry.dependencies]`.
+Option 1: Install packages directly from a Git repository directly.
+1. Example with poetry pyproject.toml: 
+Add the github link `iftracer-sdk = {git = "https://github.com/insightfinder/iftracer-sdk"}` directly to your package's `pyproject.toml` under `[tool.poetry.dependencies]`. Then run `poetry install`
+2. Example with pip install requirements.txt:
+`pip install git+https://github.com/insightfinder/iftracer-sdk`
 
-Option 2: Download the codes to local. Example with pyproject.toml: 
-Add the local path `iftracer-sdk = { path = "/path-to-iftracer-sdk-pkg/iftracer-sdk", develop = true }` directly to your package's `pyproject.toml` under `[tool.poetry.dependencies]`.
+Option 2: Download the codes to local. Example with poetry pyproject.toml: 
+Download the iftracer-sdk package to local. Add the local path `iftracer-sdk = { path = "/path-to-iftracer-sdk-pkg/iftracer-sdk", develop = true }` directly to your package's `pyproject.toml` under `[tool.poetry.dependencies]`. Then run `poetry install`.
+You can also use other ways like `sys.path`.
 
-Option 3: (In progress) `pip install iftracer-sdk`
+Option 3: (In progress) `pip install iftracer-sdk` from PyPI
 ```
-## Configuration Guide
-Make sure to correctly configure .env file: `IFTRACER_BASE_URL=<OpenTelemetry Endpoint>`.
-
-Alternatively, You can put the opentelemetry endpoint into python code like: `Iftracer.init(api_endpoint=<opentelemetry endpoint>)`
-
-The tracing feature won't work without setting IFTRACER_BASE_URL correctly.
-
 ## Quick Start Guide
 Add the decorators like `@workflow`, `@aworkflow`, `@task`, and `@atask` over the methods to get the tracing details. Add @workflow or @aworkflow over a function if you want to see more tags in tracing report.
 
-#### You can copy & paste the following code example to test if the iftracer is working well. Feel free to replace openai by other LLM models like claude or ollama.
+#### You can copy & paste the following code example to test if the iftracer-sdk is configured properly. Feel free to replace openai by other LLM models like claude or ollama.
 
 ```python
-from iftracer.sdk.decorators import workflow
-import openai
-from iftracer.sdk import Iftracer
-
 @workflow(name="get_chat_completion_test")
 def get_gpt4o_mini_completion(messages, model="gpt-4o-mini", temperature=0.7):
     """
@@ -61,9 +54,14 @@ def get_gpt4o_mini_completion(messages, model="gpt-4o-mini", temperature=0.7):
 
 # Example Usage
 if __name__ == "__main__":
-    # Set your OpenAI API key here or export it as environment variable.
-    openai.api_key = <Your OpenAI API Key>
-    Iftracer.init(api_endpoint=<Your OpenTelemetry API Endpoint>)  # Make sure to include the license key provided by InsightFinder when creating an OpenTelemetry API Endpoint 
+    openai.api_key = "sk-proj-..."  # Set your OpenAI API key here or export it as environment variable.
+    # You need to call Iftracer.init only once to set the environment variables. You can also call Iftracer.init() without any arguments, if you have set the environment variables somewhere else.
+    Iftracer.init( 
+        api_endpoint="http://...:14418", # Contact our devops to get the unique url. Port number is always 14418
+        ifuser="...", # The value can be found on the first line of [User Account Information](https://app.insightfinder.com/account-info) page.
+        iflicenseKey="...", # The value can be found on the 5th line of [User Account Information](https://app.insightfinder.com/account-info) page.
+        ifproject="...", # Your project's name. You can fill in any strings.
+    )
     messages = [
         {"role": "system", "content": "You are a helpful assistant."},
         {
@@ -76,15 +74,14 @@ if __name__ == "__main__":
 
     if response:
         print("GPT-4o-mini Response:", response)
-
 ```
 ```
 Successful response example:
-GPT-4o-mini Response: ChatCompletion(id='chatcmpl-...', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='Functions call themselves,  \nLayers deep, a dance of code—  \nEndless paths unfold.', refusal=None, role='assistant', audio=None, function_call=None, tool_calls=None))], created=..., model='gpt-4o-mini-2024-07-18', object='chat.completion', service_tier=None, system_fingerprint='...', usage=CompletionUsage(completion_tokens=19, prompt_tokens=28, total_tokens=47, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cached_tokens=0)))
+GPT-4o-mini Response: ChatCompletion(id='chatcmpl-...', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='Functions call themselves,  \nInfinite loops of logic,  \nDepths of thought unfold.', refusal=None, role='assistant', audio=None, function_call=None, tool_calls=None))], created=1733945910, model='gpt-4o-mini-2024-07-18', object='chat.completion', service_tier=None, system_fingerprint='...', usage=CompletionUsage(completion_tokens=17, prompt_tokens=28, total_tokens=45, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cached_tokens=0)))
 ```
 
 
-Response from langchain `ainvoke()/invoke()` will normally need a handler to show more LLM model details like `prompt token`. We can use `trace_model_response()` to catch the details and avoid the handler. For example:
+Response from langchain `ainvoke()/invoke()` will normally require users to use LLM callback_handler to show more LLM model details like `prompt token`. iftracer-sdk package provides the function `trace_model_response(<Response which you want to get details>)` to catch the details and avoid the handler. For example:
 ```python
 @task(name="joke_invoke")
 def create_joke():
@@ -95,15 +92,38 @@ def create_joke():
     trace_model_response(response) # optional. Required if must show LLM model details.
     return response
 ```
+### Choosing Between Iftracer Decorators
+1. Use @aworkflow, @atask over an asynchronous function. Use @workflow, @task over a synchronous function.
+2. Use @aworkflow or @workflow when the function calls multiple tasks or workflows and combines their results, when the function is a high-level orchestration of a process, when you need to get more tags, or when you intend to create a logical boundary for a workflow execution. Otherwise, use @atask or @task.
 
+## Step by Step Guide
+1. Register [InsightFinder](https://app.insightfinder.com) account. After logging in, click on the top-right profile icon:
+   ![Screenshot from 2024-12-11 17-21-37](https://github.com/user-attachments/assets/6903e24b-1707-418a-a653-1f24187453d1)
+2. Click on the account profile option. You will be redirected to the [User Account Information](https://app.insightfinder.com/account-info) page. On first line, you can find your user name. On 5th line, you can find your license key (not encrypted license key).
+3. Ask our DevOps for the api endpoint url by emailing maoyu at insightfinder.com.
+4. In your project's entry __init__.py file, call Iftracer.init():
+```
+Iftracer.init( 
+        api_endpoint="http://...:14418", # Contact our devops to get the unique url. Port number is always 14418
+        ifuser="...", # The value can be found on the first line of [User Account Information](https://app.insightfinder.com/account-info) page.
+        iflicenseKey="...", # The value can be found on the 5th line of [User Account Information](https://app.insightfinder.com/account-info) page.
+        ifproject="...", # Your project's name. You can fill in any strings.
+    )
+```
+5. Above the function you want to trace, add decorators like @aworkflow, @atask, @workflow, @task.
+6. If you are using langchain, you can use trace_model_response on the response returned by `ainvoke()/invoke()`. 
+7. Run your program. The tracing data will be received by InsightFinder.
+8. You can find the data in Log Analysis page from Log/Trace Analysis in [InsightFinder](https://app.insightfinder.com):
+![Screenshot-from-2024-12-11-17-54-27](https://github.com/user-attachments/assets/d7709aad-0122-46ea-9068-c301fa2d6e74)
 
 ## Unique features
 1. New Tags: 
 We have extracted additional data from LLM models to tags to assist tracing.
 For example, we have extracted the LLM model's name, PG vector's embedding model name, and the dataset retrieved by RAG, and so on, to the workflow spans' tags. 
-2. Customizable 
+2. Customizable: 
 We can add more tags if you need them. We can adjust the tracers' behaviors based on your needs.
-
+3. Easy to use:
+Compared to other tracer packages, we don't require users to create an opentelemetry link. Users can easily use the username, licensekey and api endpoint provided by us to access the service.
 
 ## FAQ:
 1. Why I can't find the new tags?
