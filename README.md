@@ -56,11 +56,11 @@ def get_gpt4o_mini_completion(messages, model="gpt-4o-mini", temperature=0.7):
 if __name__ == "__main__":
     openai.api_key = "sk-proj-..."  # Set your OpenAI API key here or export it as environment variable.
     # You need to call Iftracer.init only once to set the environment variables. You can also call Iftracer.init() without any arguments, if you have set the environment variables somewhere else.
-    Iftracer.init(  # API_KEY is not supported. Please set values to api_endpoint, ifuser, iflicenseKey, and ifproject to access.
+    Iftracer.init( 
         api_endpoint="http://...:14418", # Contact our devops to get the unique url. Port number is always 14418
-        ifuser="...", # Your user name shown in the InsightFinder profile
-        iflicenseKey="...", # Your license key shown in the InsightFinder profile
-        ifproject="...", # Your project's name
+        ifuser="...", # The value can be found on the first line of [User Account Information](https://app.insightfinder.com/account-info) page.
+        iflicenseKey="...", # The value can be found on the 5th line of [User Account Information](https://app.insightfinder.com/account-info) page.
+        ifproject="...", # Your project's name. You can fill in any strings.
     )
     messages = [
         {"role": "system", "content": "You are a helpful assistant."},
@@ -97,7 +97,24 @@ def create_joke():
 2. Use @aworkflow or @workflow when the function calls multiple tasks or workflows and combines their results, when the function is a high-level orchestration of a process, when you need to get more tags, or when you intend to create a logical boundary for a workflow execution. Otherwise, use @atask or @task.
 
 ## Step by Step Guide
-
+1. Register [InsightFinder](https://app.insightfinder.com) account. After logging in, click on the top-right profile icon:
+   ![Screenshot from 2024-12-11 17-21-37](https://github.com/user-attachments/assets/6903e24b-1707-418a-a653-1f24187453d1)
+2. Click on the account profile option. You will be redirected to the [User Account Information](https://app.insightfinder.com/account-info) page. On first line, you can find your user name. On 5th line, you can find your license key (not encrypted license key).
+3. Ask our DevOps for the api endpoint url by emailing maoyu at insightfinder.com.
+4. In your project's entry __init__.py file, call Iftracer.init():
+```
+Iftracer.init( 
+        api_endpoint="http://...:14418", # Contact our devops to get the unique url. Port number is always 14418
+        ifuser="...", # The value can be found on the first line of [User Account Information](https://app.insightfinder.com/account-info) page.
+        iflicenseKey="...", # The value can be found on the 5th line of [User Account Information](https://app.insightfinder.com/account-info) page.
+        ifproject="...", # Your project's name. You can fill in any strings.
+    )
+```
+5. Above the function you want to trace, add decorators like @aworkflow, @atask, @workflow, @task.
+6. If you are using langchain, you can use trace_model_response on the response returned by `ainvoke()/invoke()`. 
+7. Run your program. The tracing data will be received by InsightFinder.
+8. You can find the data in Log Analysis page from Log/Trace Analysis in [InsightFinder](https://app.insightfinder.com):
+![Screenshot-from-2024-12-11-17-54-27](https://github.com/user-attachments/assets/d7709aad-0122-46ea-9068-c301fa2d6e74)
 
 ## Unique features
 1. New Tags: 
