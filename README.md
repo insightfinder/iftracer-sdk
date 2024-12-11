@@ -57,7 +57,7 @@ if __name__ == "__main__":
     openai.api_key = "sk-proj-..."  # Set your OpenAI API key here or export it as environment variable.
     # You need to call Iftracer.init only once to set the environment variables. You can also call Iftracer.init() without any arguments, if you have set the environment variables somewhere else.
     Iftracer.init( 
-        api_endpoint="http://...:14418", # Contact our devops to get the unique url. Port number is always 14418
+        api_endpoint=<YOUR_INSIGHTFINDER_ENDPOINT>, # Contact our devops to get the unique url. Port number is always 14418
         ifuser="...", # The value can be found on the first line of [User Account Information](https://app.insightfinder.com/account-info) page.
         iflicenseKey="...", # The value can be found on the 5th line of [User Account Information](https://app.insightfinder.com/account-info) page.
         ifproject="...", # Your project's name. You can fill in any strings.
@@ -100,11 +100,11 @@ def create_joke():
 1. Register [InsightFinder](https://app.insightfinder.com) account. After logging in, click on the top-right profile icon:
    ![Screenshot from 2024-12-11 17-21-37](https://github.com/user-attachments/assets/6903e24b-1707-418a-a653-1f24187453d1)
 2. Click on the account profile option. You will be redirected to the [User Account Information](https://app.insightfinder.com/account-info) page. On first line, you can find your user name. On 5th line, you can find your license key (not encrypted license key).
-3. Ask our DevOps for the api endpoint url by emailing maoyu at insightfinder.com.
+3. Ask our DevOps for the api endpoint url by emailing support@insightfinder.com.
 4. In your project's entry __init__.py file, call Iftracer.init():
 ```
 Iftracer.init( 
-        api_endpoint="http://...:14418", # Contact our devops to get the unique url. Port number is always 14418
+        api_endpoint=<YOUR_INSIGHTFINDER_ENDPOINT>, # Contact our devops to get the unique url. Port number is always 14418
         ifuser="...", # The value can be found on the first line of [User Account Information](https://app.insightfinder.com/account-info) page.
         iflicenseKey="...", # The value can be found on the 5th line of [User Account Information](https://app.insightfinder.com/account-info) page.
         ifproject="...", # Your project's name. You can fill in any strings.
