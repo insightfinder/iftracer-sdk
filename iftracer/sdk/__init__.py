@@ -95,9 +95,12 @@ class Iftracer:
 
         # Tracer init
         resource_attributes.update({SERVICE_NAME: app_name})
-        headers['iftracer_user'] = iftracer_user
-        headers['iftracer_license_key'] = iftracer_license_key
-        headers['iftracer_project'] = iftracer_project
+        if iftracer_user:
+            headers['iftracer_user'] = iftracer_user
+        if iftracer_license_key:
+            headers['iftracer_license_key'] = iftracer_license_key
+        if iftracer_project:
+            headers['iftracer_project'] = iftracer_project
         TracerWrapper.set_static_params(
             resource_attributes, enable_content_tracing, api_endpoint, headers
         )
