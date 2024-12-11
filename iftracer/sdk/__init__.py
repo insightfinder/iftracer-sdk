@@ -40,6 +40,9 @@ class Iftracer:
     @staticmethod
     def init(
         app_name: Optional[str] = sys.argv[0],
+        iftracer_user: str = "",
+        iftracer_license_key: str = "",
+        iftracer_project: str = "",
         api_endpoint: str = "",
         headers: Dict[str, str] = {},
         disable_batch=False,
@@ -48,7 +51,6 @@ class Iftracer:
         metrics_headers: Dict[str, str] = None,
         processor: SpanProcessor = None,
         propagator: TextMapPropagator = None,
-        traceloop_sync_enabled: bool = True,
         should_enrich_metrics: bool = True,
         resource_attributes: dict = {},
         instruments: Optional[Set[Instruments]] = None,
@@ -57,18 +59,6 @@ class Iftracer:
 
         api_endpoint = os.getenv("IFTRACER_BASE_URL") or api_endpoint
         api_key = None # Disable the usage of api_key
-
-        if (
-            traceloop_sync_enabled
-            and api_endpoint != ""
-            and not exporter
-            and not processor
-        ):
-            Iftracer.__fetcher = Fetcher(base_url=api_endpoint, api_key=api_key)
-            Iftracer.__fetcher.run()
-            print(
-                Fore.GREEN + "Iftracer syncing configuration and prompts" + Fore.RESET
-            )
 
         if not is_tracing_enabled():
             print(Fore.YELLOW + "Tracing is disabled" + Fore.RESET)
@@ -83,6 +73,8 @@ class Iftracer:
 
         if isinstance(headers, str):
             headers = parse_env_headers(headers)
+        
+
 
         if not exporter and not processor and headers:
             print(
@@ -103,6 +95,9 @@ class Iftracer:
 
         # Tracer init
         resource_attributes.update({SERVICE_NAME: app_name})
+        headers['iftracer_user'] = iftracer_user
+        headers['iftracer_license_key'] = iftracer_license_key
+        headers['iftracer_project'] = iftracer_project
         TracerWrapper.set_static_params(
             resource_attributes, enable_content_tracing, api_endpoint, headers
         )

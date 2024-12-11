@@ -14,11 +14,11 @@ Add the local path `iftracer-sdk = { path = "/path-to-iftracer-sdk-pkg/iftracer-
 Option 3: (In progress) `pip install iftracer-sdk`
 ```
 ## Configuration Guide
-Make sure to correctly configure .env file: `TRACELOOP_BASE_URL=<OpenTelemetry Endpoint>`.
+Make sure to correctly configure .env file: `IFTRACER_BASE_URL=<OpenTelemetry Endpoint>`.
 
 Alternatively, You can put the opentelemetry endpoint into python code like: `Iftracer.init(api_endpoint=<opentelemetry endpoint>)`
 
-The tracing feature won't work without setting TRACELOOP_BASE_URL correctly.
+The tracing feature won't work without setting IFTRACER_BASE_URL correctly.
 
 ## Quick Start Guide
 Add the decorators like `@workflow`, `@aworkflow`, `@task`, and `@atask` over the methods to get the tracing details. Add @workflow or @aworkflow over a function if you want to see more tags in tracing report.
