@@ -74,8 +74,6 @@ class Iftracer:
         if isinstance(headers, str):
             headers = parse_env_headers(headers)
         
-
-
         if not exporter and not processor and headers:
             print(
                 Fore.GREEN
@@ -96,11 +94,12 @@ class Iftracer:
         # Tracer init
         resource_attributes.update({SERVICE_NAME: app_name})
         if iftracer_user:
-            headers['iftracer_user'] = iftracer_user
+            # Arguments passed in Iftracer.init() will have higher priority than other environment variables values.
+            headers['iftracer_user'] = iftracer_user or os.getenv("IFTRACER_USER") or "" 
         if iftracer_license_key:
-            headers['iftracer_license_key'] = iftracer_license_key
+            headers['iftracer_license_key'] = iftracer_license_key or os.getenv("IFTRACER_LICENSE_KEY")  or ""
         if iftracer_project:
-            headers['iftracer_project'] = iftracer_project
+            headers['iftracer_project'] = iftracer_project or os.getenv("IFTRACER_PROJECT_NAME")  or ""
         TracerWrapper.set_static_params(
             resource_attributes, enable_content_tracing, api_endpoint, headers
         )
