@@ -2,9 +2,8 @@
 
 Iftracer’s Python SDK allows you to easily start monitoring and debugging your LLM execution. Tracing is done in a non-intrusive way, built on top of OpenTelemetry. The repo contains standard OpenTelemetry instrumentations for LLM providers and Vector DBs, as well as a Iftracer SDK that makes it easy to get started with OpenLLMetry, while still outputting standard OpenTelemetry data that can be connected to your observability stack.
 
-## Installation Guide
+### Installation Guide
 
-```
 Option 1: Install packages directly from a Git repository directly.
 1. Example with poetry pyproject.toml: 
 Add the github link `iftracer-sdk = {git = "https://github.com/insightfinder/iftracer-sdk"}` directly to your package's `pyproject.toml` under `[tool.poetry.dependencies]`. Then run `poetry install`
@@ -16,7 +15,7 @@ Download the iftracer-sdk package to local. Add the local path `iftracer-sdk = {
 You can also use other ways like `sys.path`.
 
 Option 3: (In progress) `pip install iftracer-sdk` from PyPI
-```
+
 ## Quick Start Guide
 Add the decorators like `@workflow`, `@aworkflow`, `@task`, and `@atask` over the methods to get the tracing details. Add @workflow or @aworkflow over a function if you want to see more tags in tracing report.
 
@@ -57,7 +56,7 @@ if __name__ == "__main__":
     openai.api_key = "sk-proj-..."  # Set your OpenAI API key here or export it as environment variable.
     # You need to call Iftracer.init only once to set the environment variables. You can also call Iftracer.init() without any arguments, if you have set the environment variables somewhere else.
     Iftracer.init( 
-        api_endpoint=<YOUR_INSIGHTFINDER_ENDPOINT>, # Contact our devops to get the unique url. Port number is always 14418
+        api_endpoint=http://<IF_ENDPOINT>:<PORT> # Contact our devops to get the unique url. 
         ifuser="...", # The value can be found on the first line of [User Account Information](https://app.insightfinder.com/account-info) page.
         iflicenseKey="...", # The value can be found on the 5th line of [User Account Information](https://app.insightfinder.com/account-info) page.
         ifproject="...", # Your project's name. You can fill in any strings.
@@ -80,8 +79,14 @@ Successful response example:
 GPT-4o-mini Response: ChatCompletion(id='chatcmpl-...', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='Functions call themselves,  \nInfinite loops of logic,  \nDepths of thought unfold.', refusal=None, role='assistant', audio=None, function_call=None, tool_calls=None))], created=1733945910, model='gpt-4o-mini-2024-07-18', object='chat.completion', service_tier=None, system_fingerprint='...', usage=CompletionUsage(completion_tokens=17, prompt_tokens=28, total_tokens=45, completion_tokens_details=CompletionTokensDetails(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0), prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cached_tokens=0)))
 ```
 
+## Choosing Between Iftracer Decorators
+1. Use @aworkflow, @atask over an asynchronous function. Use @workflow, @task over a synchronous function.
+2. Use @aworkflow or @workflow when the function calls multiple tasks or workflows and combines their results, when the function is a high-level orchestration of a process, when you need to get more tags, or when you intend to create a logical boundary for a workflow execution. Otherwise, use @atask or @task.
 
-Response from langchain `ainvoke()/invoke()` will normally require users to use LLM callback_handler to show more LLM model details like `prompt token`. iftracer-sdk package provides the function `trace_model_response(<Response which you want to get details>)` to catch the details and avoid the handler. For example:
+## Trace Prompt and Response Content
+
+Sometimes, the tracer can't catch the details of LLM model. For example, response from langchain `ainvoke()/invoke()` will normally require users to use LLM callback_handler to show more LLM model details like `prompt token`. iftracer-sdk package provides the function `trace_model_response(<Response which you want to get details>)` to catch the details and avoid the handler. For example:
+
 ```python
 @task(name="joke_invoke")
 def create_joke():
@@ -92,19 +97,17 @@ def create_joke():
     trace_model_response(response) # optional. Required if must show LLM model details.
     return response
 ```
-### Choosing Between Iftracer Decorators
-1. Use @aworkflow, @atask over an asynchronous function. Use @workflow, @task over a synchronous function.
-2. Use @aworkflow or @workflow when the function calls multiple tasks or workflows and combines their results, when the function is a high-level orchestration of a process, when you need to get more tags, or when you intend to create a logical boundary for a workflow execution. Otherwise, use @atask or @task.
+
 
 ## Step by Step Guide
 1. Register [InsightFinder](https://app.insightfinder.com) account. After logging in, click on the top-right profile icon:
    ![Screenshot from 2024-12-11 17-21-37](https://github.com/user-attachments/assets/6903e24b-1707-418a-a653-1f24187453d1)
 2. Click on the account profile option. You will be redirected to the [User Account Information](https://app.insightfinder.com/account-info) page. On first line, you can find your user name. On 5th line, you can find your license key (not encrypted license key).
-3. Ask our DevOps for the api endpoint url by emailing support@insightfinder.com.
+3. Install and import iftracer-sdk to your packages.
 4. In your project's entry __init__.py file, call Iftracer.init():
 ```
 Iftracer.init( 
-        api_endpoint=<YOUR_INSIGHTFINDER_ENDPOINT>, # Contact our devops to get the unique url. Port number is always 14418
+        api_endpoint=http://<IF_ENDPOINT>:<PORT>, # Contact our devops to get the unique url.
         ifuser="...", # The value can be found on the first line of [User Account Information](https://app.insightfinder.com/account-info) page.
         iflicenseKey="...", # The value can be found on the 5th line of [User Account Information](https://app.insightfinder.com/account-info) page.
         ifproject="...", # Your project's name. You can fill in any strings.
