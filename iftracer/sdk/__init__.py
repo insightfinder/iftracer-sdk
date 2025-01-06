@@ -58,6 +58,8 @@ class Iftracer:
         Telemetry()
 
         api_endpoint = os.getenv("IFTRACER_BASE_URL") or api_endpoint
+        if api_endpoint is None:
+            return
         api_key = None # Disable the usage of api_key
 
         if not is_tracing_enabled():
