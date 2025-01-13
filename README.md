@@ -128,6 +128,10 @@ We can add more tags if you need them. We can adjust the tracers' behaviors base
 3. Easy to use:
 Compared to other tracer packages, we don't require users to create an opentelemetry link. Users can easily use the username, licensekey and api endpoint provided by us to access the service.
 
+## LICENSE
+
+Uses the [Apache License 2.0](https://github.com/apache/.github/blob/main/LICENSE)
+
 ## FAQ:
 1. Why I can't find the new tags?
 1.1. This package won't extract the metadata like `prompt token` from response if the chain (e.g.: `joke_generator_langchain`) contains [StrOutputParser()](https://api.python.langchain.com/en/latest/output_parsers/langchain_core.output_parsers.string.StrOutputParser.html). Try to remove `StrOutputParser()` from the chain and stringify the result later. 
