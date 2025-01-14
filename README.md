@@ -2,19 +2,26 @@
 
 Iftracer’s Python SDK allows you to easily start monitoring and debugging your LLM execution. Tracing is done in a non-intrusive way, built on top of OpenTelemetry. The repo contains standard OpenTelemetry instrumentations for LLM providers and Vector DBs, as well as a Iftracer SDK that makes it easy to get started with OpenLLMetry, while still outputting standard OpenTelemetry data that can be connected to your observability stack.
 
-### Installation Guide
+## Installation Guide
 
-Option 1: Install packages directly from a Git repository directly.
-1. Example with poetry pyproject.toml: 
+### 1. Install directly from PyPI
+
+Run the following command to install iftracer-sdk from PyPI
+
+```bash
+pip install iftracer-sdk
+```
+
+
+### 2. Install packages directly from the Git repository
+- Example with poetry pyproject.toml: 
 Add the github link `iftracer-sdk = {git = "https://github.com/insightfinder/iftracer-sdk"}` directly to your package's `pyproject.toml` under `[tool.poetry.dependencies]`. Then run `poetry install`
-2. Example with pip install requirements.txt:
+- Example with pip install requirements.txt:
 `pip install git+https://github.com/insightfinder/iftracer-sdk`
 
-Option 2: Download the codes to local. Example with poetry pyproject.toml: 
+### 3. Download the code to local. Example with poetry pyproject.toml 
 Download the iftracer-sdk package to local. Add the local path `iftracer-sdk = { path = "/path-to-iftracer-sdk-pkg/iftracer-sdk", develop = true }` directly to your package's `pyproject.toml` under `[tool.poetry.dependencies]`. Then run `poetry install`.
 You can also use other ways like `sys.path`.
-
-Option 3: (In progress) `pip install iftracer-sdk` from PyPI
 
 ## Quick Start Guide
 Add the decorators like `@workflow`, `@aworkflow`, `@task`, and `@atask` over the methods to get the tracing details. Add @workflow or @aworkflow over a function if you want to see more tags in tracing report.
