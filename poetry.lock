@@ -1606,13 +1606,14 @@ opentelemetry-semantic-conventions = ">=0.46b0,<0.47"
 
 [[package]]
 name = "opentelemetry-if-instrumentation-mistralai"
-version = "0.25.6"
+version = "1.0.0"
 description = "OpenTelemetry Mistral AI instrumentation"
 optional = false
 python-versions = "<4,>=3.9"
 groups = ["main"]
 files = [
-    {file = "opentelemetry_if_instrumentation_mistralai-0.25.6-py3-none-any.whl", hash = "sha256:dc860f5bd772ecf0bd6aac114d1ed9f65746c47666a653d49fa85833b97801aa"},
+    {file = "opentelemetry_if_instrumentation_mistralai-1.0.0-py3-none-any.whl", hash = "sha256:7ff6459f73a62e0c8eb38cd4d290f20d3c181e4fad3698e27096830fc734a251"},
+    {file = "opentelemetry_if_instrumentation_mistralai-1.0.0.tar.gz", hash = "sha256:80672400f22b815acbfc2ff62b2b7121707877c853c99a7f0e85bd0d108c5cd9"},
 ]
 
 [package.dependencies]
@@ -3220,4 +3221,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9,<4"
-content-hash = "85e19f1d37ffaf875c0f6ab306d51f7a30d54a10664ca4ca0f6a5aa58c024941"
+content-hash = "d1d0f408ba434c4a69f15a72a1aaa819c52f0e2ceef35e458b69889fbe724e56"
