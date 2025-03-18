@@ -8,7 +8,7 @@ show_missing = true
 
 [tool.poetry]
 name = "iftracer-sdk"
-version = "0.2.0"
+version = "0.2.1"
 description = "Iftracer Software Development Kit (SDK) for Python"
 authors = [
   "Gal Kleinman <gal@traceloop.com>",
@@ -35,7 +35,7 @@ opentelemetry-instrumentation-requests = "^0.46b0"
 opentelemetry-instrumentation-sqlalchemy = "^0.46b0"
 opentelemetry-instrumentation-urllib3 = "^0.46b0"
 opentelemetry-if-semantic-conventions-ai = "^0.3.6"
-opentelemetry-if-instrumentation-mistralai = "^0.25.6"
+opentelemetry-if-instrumentation-mistralai = "^1.0.0"
 opentelemetry-if-instrumentation-openai = "^0.25.6"
 opentelemetry-if-instrumentation-ollama = "^0.25.6"
 opentelemetry-if-instrumentation-anthropic = "^0.25.6"
