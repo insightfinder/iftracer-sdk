@@ -25,6 +25,8 @@ from iftracer.sdk.tracing.tracing import (
     set_association_properties,
     set_external_prompt_tracing_context,
 )
+from iftracer.sdk.evaluation import Evaluator
+from iftracer.sdk.evaluation.models import EvaluationConfig
 from typing import Dict
 
 
@@ -36,6 +38,7 @@ class Iftracer:
 
     __tracer_wrapper: TracerWrapper
     __fetcher: Fetcher = None
+    __evaluator: Optional[Evaluator] = None
 
     @staticmethod
     def init(
@@ -54,6 +57,11 @@ class Iftracer:
         should_enrich_metrics: bool = True,
         resource_attributes: dict = {},
         instruments: Optional[Set[Instruments]] = None,
+        # Evaluation-specific parameters
+        evaluation_project_name: str = "",
+        evaluation_api_endpoint: str = "",
+        evaluation_api_key: str = "",
+        evaluation_username: str = "",
     ) -> None:
         Telemetry()
 
@@ -114,6 +122,16 @@ class Iftracer:
             instruments=instruments,
         )
 
+        # Initialize evaluation configuration if parameters are provided
+        if evaluation_api_endpoint or evaluation_api_key or evaluation_username or evaluation_project_name:
+            eval_config = EvaluationConfig(
+                project_name=evaluation_project_name or iftracer_project,
+                api_endpoint=evaluation_api_endpoint or api_endpoint,
+                api_key=evaluation_api_key or iftracer_license_key,
+                username=evaluation_username or iftracer_user,
+            )
+            Iftracer.__evaluator = Evaluator(eval_config)
+
         if not metrics_exporter and exporter:
             return
 
@@ -161,3 +179,175 @@ class Iftracer:
                 "score": score,
             },
         )
+
+    @staticmethod
+    def _get_trace_eval_timestamps():
+        '''
+        trace_time is utc_timestamp
+        eval_time is local_timestamp
+        '''
+        from datetime import datetime, timezone
+        local_time = datetime.now()
+        utc_timestamp = int(local_time.timestamp() * 1000)
+        # Get the offset from UTC in seconds
+        offset_seconds = local_time.astimezone().utcoffset()
+        if offset_seconds:
+            offset = int(offset_seconds.total_seconds() * 1000)
+        else:
+            offset = 0
+        local_timestamp = utc_timestamp + offset
+        return utc_timestamp, local_timestamp
+
+    @staticmethod
+    def get_evaluator(config: Optional[EvaluationConfig] = None) -> Evaluator:
+        """Get or create evaluator instance."""
+        if not Iftracer.__evaluator:
+            Iftracer.__evaluator = Evaluator(config)
+        return Iftracer.__evaluator
+
+    @staticmethod
+    def evaluate_safety(prompt: str, trace_id: Optional[str] = None, 
+                       timestamp: Optional[int] = None):
+        """Evaluate prompt for safety issues."""
+        import uuid
+        
+        evaluator = Iftracer.get_evaluator()
+        
+        # Use defaults if not provided
+        if trace_id is None:
+            trace_id = str(uuid.uuid4())
+        if timestamp is None:
+            _, timestamp = Iftracer._get_trace_eval_timestamps()
+        
+        request = evaluator.create_evaluation_request(
+            prompt=prompt,
+            trace_id=trace_id,
+            timestamp=timestamp,
+            project_name=None  # Will use evaluator's configured project name
+        )
+        return evaluator.evaluate_safety(request)
+
+    @staticmethod
+    def evaluate_hallucination_bias(prompt: str, response: str, trace_id: Optional[str] = None,
+                                   timestamp: Optional[int] = None):
+        """Evaluate prompt and response for hallucination and bias."""
+        import uuid
+        
+        evaluator = Iftracer.get_evaluator()
+        
+        # Use defaults if not provided
+        if trace_id is None:
+            trace_id = str(uuid.uuid4())
+        if timestamp is None:
+            _, timestamp = Iftracer._get_trace_eval_timestamps()
+        
+        request = evaluator.create_evaluation_request(
+            prompt=prompt,
+            response=response,
+            trace_id=trace_id,
+            timestamp=timestamp,
+            project_name=None  # Will use evaluator's configured project name
+        )
+        return evaluator.evaluate_hallucination_bias(request)
+
+    @staticmethod
+    def evaluate_external_hallucination(prompt: str, response: str, explanation: str, score: int,
+                                       trace_id: Optional[str] = None, timestamp: Optional[int] = None):
+        """Evaluate external hallucination with explanation and score."""
+        import uuid
+        
+        evaluator = Iftracer.get_evaluator()
+        
+        # Use defaults if not provided
+        if trace_id is None:
+            trace_id = str(uuid.uuid4())
+        if timestamp is None:
+            _, timestamp = Iftracer._get_trace_eval_timestamps()
+        
+        request = evaluator.create_evaluation_request(
+            prompt=prompt,
+            response=response,
+            explanation=explanation,
+            score=score,
+            trace_id=trace_id,
+            timestamp=timestamp,
+            project_name=None  # Will use evaluator's configured project name
+        )
+        return evaluator.evaluate_external_hallucination(request)
+
+    # Backward compatibility alias
+    @staticmethod
+    def evaluate_custom_hallucination(prompt: str, response: str, explanation: str, score: int,
+                                     trace_id: Optional[str] = None, timestamp: Optional[int] = None):
+        """Deprecated: Use evaluate_external_hallucination instead."""
+        import warnings
+        warnings.warn(
+            "evaluate_custom_hallucination is deprecated. Use evaluate_external_hallucination instead.",
+            DeprecationWarning,
+            stacklevel=2
+        )
+        return Iftracer.evaluate_external_hallucination(prompt, response, explanation, score, trace_id, timestamp)
+
+    # Batch evaluation methods
+    @staticmethod
+    def batch_evaluate_safety(prompts: list, trace_ids: Optional[list] = None, 
+                             timestamps: Optional[list] = None, project_name: Optional[str] = None):
+        """Evaluate multiple prompts for safety issues."""
+        from iftracer.sdk.evaluation import BatchEvaluator
+        
+        evaluator = Iftracer.get_evaluator()
+        batch_evaluator = BatchEvaluator(evaluator.config)
+        return batch_evaluator.evaluate_safety_batch(
+            prompts=prompts,
+            trace_ids=trace_ids,
+            timestamps=timestamps,
+            project_name=project_name
+        )
+
+    @staticmethod  
+    def batch_evaluate_hallucination_bias(prompts: list, responses: list,
+                                         trace_ids: Optional[list] = None,
+                                         timestamps: Optional[list] = None,
+                                         project_name: Optional[str] = None):
+        """Evaluate multiple prompt/response pairs for hallucination and bias."""
+        from iftracer.sdk.evaluation import BatchEvaluator
+        
+        evaluator = Iftracer.get_evaluator()
+        batch_evaluator = BatchEvaluator(evaluator.config)
+        return batch_evaluator.evaluate_hallucination_bias_batch(
+            prompts=prompts,
+            responses=responses,
+            trace_ids=trace_ids,
+            timestamps=timestamps,
+            project_name=project_name
+        )
+
+    @staticmethod
+    def batch_evaluate_external_hallucination(prompts: list, responses: list,
+                                           explanations: list, scores: list,
+                                           trace_ids: Optional[list] = None,
+                                           timestamps: Optional[list] = None,
+                                           project_name: Optional[str] = None):
+        """Evaluate multiple external hallucination requests."""
+        from iftracer.sdk.evaluation import BatchEvaluator
+        
+        evaluator = Iftracer.get_evaluator()
+        batch_evaluator = BatchEvaluator(evaluator.config)
+        return batch_evaluator.evaluate_external_hallucination_batch(
+            prompts=prompts,
+            responses=responses,
+            explanations=explanations,
+            scores=scores,
+            trace_ids=trace_ids,
+            timestamps=timestamps,
+            project_name=project_name
+        )
+
+    @staticmethod
+    def batch_evaluate_mixed(evaluation_configs: list, project_name: Optional[str] = None):
+        """Evaluate a mixed batch with different evaluation types."""
+        from iftracer.sdk.evaluation import BatchEvaluator
+        
+        evaluator = Iftracer.get_evaluator()
+        batch_evaluator = BatchEvaluator(evaluator.config)
+        return batch_evaluator.evaluate_mixed_batch(evaluation_configs)

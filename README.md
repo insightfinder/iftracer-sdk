@@ -2,6 +2,18 @@
 
 Iftracer’s Python SDK allows you to easily start monitoring and debugging your LLM execution. Tracing is done in a non-intrusive way, built on top of OpenTelemetry. The repo contains standard OpenTelemetry instrumentations for LLM providers and Vector DBs, as well as a Iftracer SDK that makes it easy to get started with OpenLLMetry, while still outputting standard OpenTelemetry data that can be connected to your observability stack.
 
+## ✨ New: Evaluation Module
+
+The IF Tracer SDK now includes comprehensive evaluation capabilities for AI/ML applications:
+
+- **Safety Evaluation**: Evaluate prompts for safety concerns  
+- **Hallucination/Bias Detection**: Analyze prompt-response pairs for hallucinations and bias
+- **External Hallucination Evaluation**: Custom evaluation with explanations and scores
+- **Batch Processing**: Evaluate multiple items efficiently with parallel processing
+- **Async Support**: Asynchronous batch processing for better performance
+
+[📖 **View Evaluation Documentation**](examples/EVALUATION.md) | [🔗 **See Examples**](examples/evaluation_example.py)
+
 ## Installation Guide
 
 ### 1. Install directly from PyPI
