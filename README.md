@@ -119,8 +119,7 @@ def create_joke():
 
 
 ## Step by Step Guide
-1. Register [InsightFinder](https://app.insightfinder.com) account. After logging in, click on the top-right profile icon:
-   ![Screenshot from 2024-12-11 17-21-37](https://github.com/user-attachments/assets/6903e24b-1707-418a-a653-1f24187453d1)
+1. Register [InsightFinder AI](https://ai.insightfinder.com) account.
 2. Click on the account profile option. You will be redirected to the [User Account Information](https://app.insightfinder.com/account-info) page. On first line, you can find your user name. On 5th line, you can find your license key (not encrypted license key).
 3. Install and import iftracer-sdk to your packages.
 4. In your project's entry __init__.py file, call Iftracer.init():
