@@ -135,8 +135,8 @@ Iftracer.init(
 5. Above the function you want to trace, add decorators like @aworkflow, @atask, @workflow, @task.
 6. If you are using langchain, you can use trace_model_response on the response returned by `ainvoke()/invoke()`. 
 7. Run your program. The tracing data will be received by InsightFinder.
-8. You can find the data in Log Analysis page from Log/Trace Analysis in [InsightFinder](https://app.insightfinder.com):
-![Screenshot-from-2024-12-11-17-54-27](https://github.com/user-attachments/assets/d7709aad-0122-46ea-9068-c301fa2d6e74)
+8. You can find the data in Trace Analysis page  [InsightFinder AI](https://ai.insightfinder.com):
+![aw-tracer.png](examples/aw-tracer.png)
 
 ## Unique features
 1. New Tags: 
