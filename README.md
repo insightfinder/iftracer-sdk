@@ -75,7 +75,7 @@ if __name__ == "__main__":
     openai.api_key = "sk-proj-..."  # Set your OpenAI API key here or export it as environment variable.
     # You need to call Iftracer.init only once to set the environment variables. You can also call Iftracer.init() without any arguments, if you have set the environment variables somewhere else.
     Iftracer.init( 
-        api_endpoint=http://<IF_ENDPOINT>:<PORT> # Contact our devops to get the unique url. 
+        api_endpoint=https://trace.insightfinder.com # Contact our devops to get the unique url. 
         ifuser="...", # The value can be found on the first line of [User Account Information](https://app.insightfinder.com/account-info) page.
         iflicenseKey="...", # The value can be found on the 5th line of [User Account Information](https://app.insightfinder.com/account-info) page.
         ifproject="...", # Your project's name. You can fill in any strings.
@@ -125,7 +125,7 @@ def create_joke():
 4. In your project's entry __init__.py file, call Iftracer.init():
 ```
 Iftracer.init( 
-        api_endpoint=http://<IF_ENDPOINT>:<PORT>, # Contact our devops to get the unique url.
+        api_endpoint=https://trace.insightfinder.com, # Contact our devops to get the unique url.
         ifuser="...", # The value can be found on the first line of [User Account Information](https://app.insightfinder.com/account-info) page.
         iflicenseKey="...", # The value can be found on the 5th line of [User Account Information](https://app.insightfinder.com/account-info) page.
         ifproject="...", # Your project's name. You can fill in any strings.
